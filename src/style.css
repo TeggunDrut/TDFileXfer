@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+}
+p {
+  background-color: lightgray;
+  font-size: 20px;
+  padding: 10px;
+}
+.row {
+  display: grid !important;
+  grid-template-columns: 60% 20% 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid;
+}
+.gray {
+  background-color: lightgray;
+}
+.row > button {
+  width: 90%;
+  height: 90%;
+  min-height: 40px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
