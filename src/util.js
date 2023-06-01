@@ -75,7 +75,21 @@ async function listFiles() {
 }
 async function deleteFile(file) {
   let ref = window.ref(window.db, "home/" + file.name.split("|")[1]);
+  let ref2 = window.ref(window.db, "home/" + file.id);
+
+  try {
+    await window.remove(ref);
+  } catch (error) {
+    try {
+      await window.remove(ref2);
+      
+    } catch (error) {
+      console.log("Couldnt delete file(s)");``
+    }
+  }
+  
   await window.remove(ref);
+  await window.remove(ref2);
   listFiles();
 }
 function removeEmptyStrings(array) {

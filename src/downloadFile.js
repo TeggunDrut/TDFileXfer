@@ -1,6 +1,7 @@
 
 async function downloadFile(file) {
   if (file.type === "dir") {
+    console.log(file)
     let j = new JSZip();
     for (let i = 0; i < Object.keys(file.files).length; i++) {
       let f = file.files[Object.keys(file.files)[i]];
