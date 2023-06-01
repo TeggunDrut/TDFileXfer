@@ -1,3 +1,8 @@
+function getParent(path) {
+  console.log("root/subdir/file_txt".split("/"), "root/subdir/file_txt".split("/").length - 1)
+}
+getParent()
+
 async function uploadFiles(e) {
   const files = e.target.files;
   let id = getTime();
