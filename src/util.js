@@ -52,6 +52,7 @@ async function listFiles() {
       );
       var deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
+      deleteButton.setAttribute("class", "btn btn-danger");
       deleteButton.addEventListener(
         "click",
         (function (file) {
@@ -74,9 +75,13 @@ async function listFiles() {
   }
 }
 async function deleteFile(file) {
-  let ref = window.ref(window.db, "home/" + file.name.split("|")[1]);
-  let ref2 = window.ref(window.db, "home/" + file.id);
-
+  let ref, ref2;
+  if(file.type === "dir") {
+    ref = window.ref(window.db, "home/" + file.name.split("|")[1].replace(" ", ""));
+    ref2 = window.ref(window.db, "home/" + file.id);
+  } else {
+    ref = window.ref(window.db, "home/" + file.id);
+  }
   try {
     await window.remove(ref);
   } catch (error) {
@@ -84,12 +89,10 @@ async function deleteFile(file) {
       await window.remove(ref2);
       
     } catch (error) {
-      console.log("Couldnt delete file(s)");``
+      console.log("Couldnt delete file(s)", error);
     }
   }
   
-  await window.remove(ref);
-  await window.remove(ref2);
   listFiles();
 }
 function removeEmptyStrings(array) {

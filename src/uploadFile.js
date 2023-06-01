@@ -1,7 +1,7 @@
 async function uploadFile(e) {
   let file = e.target.files[0];
   let reader = new FileReader();
-
+  let filename = file.name;
   let obj = {};
   reader.onerror = function (error) {
     console.log("Could not load file", error);
@@ -9,8 +9,19 @@ async function uploadFile(e) {
 
   if (file.type.startsWith("image")) {
     reader.readAsDataURL(file);
+  } else if(file.type.endsWith("zip")) {
+    let zip = new JSZip();
+    zip.loadAsync(file).then(function(content) {
+      const files = content.files;
+      const keys = Object.keys(files)
+      for(let i = 0 ; i < keys.length; i++) {
+        console.log(files[keys[i]])
+      }
+    }).catch(function(err) {
+        console.error("Failed to open", filename, " as ZIP file:", err);
+    })
   } else {
-    reader.readAsArrayBuffer(file);
+    reader.readAsText(file);
   }
 
   reader.onload = function (event) {
@@ -82,6 +93,10 @@ async function uploadFile(e) {
             event.target.result
           );
         }
+        window.set(
+          window.ref(window.db, "home/" + id + "/parts/0"),
+          event.target.result
+        );
       }
     }
   };

@@ -1,15 +1,30 @@
 function getParent(path) {
-  console.log("root/subdir/file_txt".split("/"), "root/subdir/file_txt".split("/").length - 1)
+  let split = path.split("/");
+  let parent = "";
+  let current = "";
+  if (split[split.length - 1] === "") {
+    parent = split[split.length - 3];
+    current = split[split.length - 2];
+  } else {
+    parent = split[split.length - 2];
+    current = split[split.length - 1];
+  }
+  return {
+    parent: parent,
+    parentPath: path.replace(current, "").replace("//", "/"),
+  };
 }
-getParent()
-
+console.log(getParent("root/subdir/currentFile/"));
 async function uploadFiles(e) {
   const files = e.target.files;
+  let folderName = getParent(
+    e.target.files[0].webkitRelativePath
+  ).parentPath.split("/")[0];
   let id = getTime();
   window.set(window.ref(window.db, "home/" + id + "/type"), "dir");
   window.set(
     window.ref(window.db, "home/" + id + "/name"),
-    "folder|" + getTime()
+    folderName + " | " + getTime()
   );
   let size = 0;
 
@@ -20,6 +35,7 @@ async function uploadFiles(e) {
     obj["name"] = file.name;
     obj["type"] = file.type;
     obj["size"] = file.size;
+    obj["path"] = file.webkitRelativePath;
 
     size += file.size;
     reader.onerror = function (error) {
@@ -29,12 +45,35 @@ async function uploadFiles(e) {
     reader.onload = async function (event) {
       obj["parts"] = [partitionData(event.target.result, 10_000)];
       console.log(file.webkitRelativePath.replace(".", "_"));
+      // window.set(
+      //   window.ref(
+      //     window.db,
+      //     "home/" + id + "/files/" + file.webkitRelativePath.replace(".", "_")
+      //   ),
+      //   obj
+      // );
       window.set(
         window.ref(
           window.db,
-          "home/" + id + "/files/" + file.webkitRelativePath.replace(".", "_")
+          ("home/" +
+            id +
+            "/files/" +
+            getParent(file.webkitRelativePath).parentPath +
+            "/files/" +
+            file.name).replace(".", "_").replace("//", "/")
         ),
         obj
+      );
+      window.set(
+        window.ref(
+          window.db,
+          "home/" +
+            id +
+            "/files/" +
+            getParent(file.webkitRelativePath).parentPath +
+            "/type"
+        ),
+        "dir"
       );
     };
 
@@ -45,4 +84,3 @@ async function uploadFiles(e) {
 
   listFiles();
 }
-
