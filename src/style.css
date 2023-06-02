@@ -1,5 +1,7 @@
-html, body {
+html,
+body {
   margin: 0;
+  height: 100%;
 }
 p {
   background-color: lightgray;
@@ -14,6 +16,9 @@ p {
   justify-content: center;
   padding: 5px;
   border: 1px solid;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  
 }
 .gray {
   background-color: lightgray;
@@ -28,4 +33,51 @@ p {
   left: 0;
   right: 0;
   margin: auto;
+}
+.container {
+  display: grid;
+}
+.container > * {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
+/* file upload button */
+input[type="file"]::file-selector-button, .listBtn {
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 40px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+  /* margin-right: 16px; */
+  transition: background-color 300ms;
+}
+input[type="file"]::file-selector-button {
+  margin-right: 16px;
+}
+
+/* file upload button hover state */
+input[type="file"]::file-selector-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* file upload button active state */
+input[type="file"]::file-selector-button:active {
+  background-color: #e5e7eb;
+}
+
+.fileList {
+  width: 90%;
+  height: 300px;
+  border: 1px solid;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  overflow-y: auto;
 }

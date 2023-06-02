@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title> TDFileXfer </title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="bootstrap.css" />
     <script
@@ -22,45 +22,40 @@
     ></script>
   </head>
   <body>
-    <div class="container">
+    <div class="container w-100 h-25">
       <!-- upload button -->
-      <div class="input-group mb-3">
-        <div class="custom-file">
-          <input
-            type="file"
-            id="fileButton"
-            value="upload"
-            title="upload"
-            onchange="uploadFile(event)"
-            class="input-group"
-          />
-          <input
-            type="file"
-            id="fileButton"
-            value="upload"
-            title="upload"
-            onchange="uploadFiles(event)"
-            class="input-group"
-            directory
-            webkitdirectory
-            multiple
-          />
-        </div>
-        <button class="btn btn-secondary" onclick="listFiles()">
-          List Files
-        </button>
-      </div>
+      <input
+        type="file"
+        id="fileButton"
+        value="upload"
+        title="upload"
+        onchange="uploadFile(event)"
+        class="input-group"
+      />
+      <input
+        type="file"
+        id="fileButton"
+        value="upload"
+        title="upload"
+        onchange="uploadFiles(event)"
+        class="input-group"
+        directory
+        webkitdirectory
+        multiple
+      />
+      <button class="listBtn" onclick="listFiles()">
+        List Files
+      </button>
 
       <!-- <label for="folder">Select folder</label> -->
       <!-- <input type="file" id="folder" webkitdirectory multiple /> -->
 
-
-      <div class="fileList" id="fileList" class="container"></div>
     </div>
+    <div class="fileList" id="fileList" class="container"></div>
 
     <script type="module" src="fb.js"></script>
     <script src="util.js"></script>
-    <script src="downloadFile.js""></script>
+    <script src="downloadFile.js"></script>
     <script src="uploadFiles.js"></script>
     <script src="uploadFile.js"></script>
     <script src="main.js"></script>

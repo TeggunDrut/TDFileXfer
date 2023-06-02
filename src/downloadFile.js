@@ -41,7 +41,7 @@ async function downloadFile(file) {
       // console.log(f.name);
     }
     j.generateAsync({ type: "blob" }).then(function (content) {
-      saveAs(content);
+      saveAs(content, file.name);
     });
   } else if (file.name.endsWith(".zip")) {
     console.log(file);
