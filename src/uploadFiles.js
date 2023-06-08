@@ -27,7 +27,7 @@ async function uploadFiles(e) {
     folderName + " | " + getTime()
   );
   let size = 0;
-
+  
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const reader = new FileReader();
@@ -36,12 +36,15 @@ async function uploadFiles(e) {
     obj["type"] = file.type;
     obj["size"] = file.size;
     obj["path"] = file.webkitRelativePath;
-
+    
     size += file.size;
     reader.onerror = function (error) {
       console.log("Could not load file", error);
     };
-
+    
+    if (file.type.startsWith("image")) {console.log(file); reader.readAsDataURL(file);}
+    else reader.readAsText(file);
+    
     reader.onload = async function (event) {
       obj["parts"] = [partitionData(event.target.result, 10_000)];
       console.log(file.webkitRelativePath.replace(".", "_"));
@@ -77,8 +80,6 @@ async function uploadFiles(e) {
       );
     };
 
-    if (file.type.startsWith("image")) reader.readAsDataURL(file);
-    else reader.readAsText(file);
   }
   window.set(window.ref(window.db, "home/" + id + "/size"), size);
 

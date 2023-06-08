@@ -4,9 +4,32 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> TDFileXfer </title>
-    <link rel="stylesheet" href="style.css" />
+    <title>TDFileXfer</title>
     <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="site.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon-16x16.png"
+    />
+    <link rel="manifest" href="./site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
       integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
@@ -22,36 +45,46 @@
     ></script>
   </head>
   <body>
-    <div class="container w-100 h-25">
-      <!-- upload button -->
-      <input
-        type="file"
-        id="fileButton"
-        value="upload"
-        title="upload"
-        onchange="uploadFile(event)"
-        class="input-group"
-      />
-      <input
-        type="file"
-        id="fileButton"
-        value="upload"
-        title="upload"
-        onchange="uploadFiles(event)"
-        class="input-group"
-        directory
-        webkitdirectory
-        multiple
-      />
-      <button class="listBtn" onclick="listFiles()">
-        List Files
-      </button>
-
-      <!-- <label for="folder">Select folder</label> -->
-      <!-- <input type="file" id="folder" webkitdirectory multiple /> -->
-
+    <div class="leftPanel">
+      <div class="card">
+        <h3 class="title">Upload A File</h3>
+        <button
+          class="inputBtn"
+          onclick="document.getElementById('fileButton').click()"
+        >
+          Upload File
+        </button>
+      </div>
+      <div class="card">
+        <h3 class="title">Upload Files</h3>
+        <button
+          class="inputBtn"
+          onclick="document.getElementById('fileButton2').click()"
+        >
+          Upload Files
+        </button>
+      </div>
+      <div class="card">
+        <h3 class="title">List Files</h3>
+        <button
+          class="btn btn-primary"
+          style="width: 200px; height: 50px"
+          onclick="listFiles()"
+        >
+          List Files
+        </button>
+      </div>
     </div>
-    <div class="fileList" id="fileList" class="container"></div>
+    <div class="rightPanel">
+      <div class="fileList" id="fileList" class="container">
+        <div id="loading" class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
 
     <script type="module" src="fb.js"></script>
     <script src="util.js"></script>
@@ -59,5 +92,32 @@
     <script src="uploadFiles.js"></script>
     <script src="uploadFile.js"></script>
     <script src="main.js"></script>
+    <input
+      type="file"
+      id="fileButton"
+      value="upload"
+      title="upload"
+      onchange="uploadFile(event)"
+      class="input-group"
+      style="display: none"
+    />
+    <input
+      type="file"
+      id="fileButton2"
+      value="upload"
+      title="upload"
+      onchange="uploadFiles(event)"
+      class="input-group"
+      directory
+      webkitdirectory
+      multiple
+      style="display: none"
+    />
   </body>
 </html>
+
+<!--       
+      
+      
+
+ -->

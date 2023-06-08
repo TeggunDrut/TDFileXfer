@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   height: 100%;
+  overflow: hidden;
 }
 p {
   background-color: lightgray;
@@ -15,10 +16,9 @@ p {
   align-items: center;
   justify-content: center;
   padding: 5px;
-  border: 1px solid;
+  border-left: 1px solid gray;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  
 }
 .gray {
   background-color: lightgray;
@@ -45,8 +45,67 @@ p {
   bottom: 0;
   margin: auto;
 }
+.container > input {
+  width: 50% !important;
+  display: inline-block;
+  -webkit-appearance: none;
+  overflow: hidden;
+  display: none !important;
+}
+/* commment */
+.listBtn {
+  width: 200px;
+  height: 50px;
+  color: white;
+  border: 1px solid #1c94f7;
+  background-color: #1c94f7;
+
+  transition: background-color 300ms;
+}
+.listBtn:hover {
+  cursor: pointer;
+  background-color: #0964b0;
+}
+.inputBtn {
+  width: 200px;
+  height: 50px;
+  color: #0964b0;
+  border: 1px solid lightgray;
+  background-color: white;
+  transition: background-color 300ms;
+}
+.inputBtn:hover {
+  cursor: pointer;
+  background-color: lightgray;
+}
+.inputBtn:focus,
+.listBtn:focus {
+  outline: none;
+}
+
+/* Faked label styles and icon */
+input[type="file"]::before {
+  position: absolute;
+  pointer-events: none;
+  top: 10px;
+  left: 16px;
+  height: 20px;
+  width: 20px;
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+}
+input[type="file"]::after {
+  position: absolute;
+  pointer-events: none;
+  top: 11px;
+  left: 40px;
+  color: #0964b0;
+}
+input[type="file"] {
+  overflow: hidden;
+}
 /* file upload button */
-input[type="file"]::file-selector-button, .listBtn {
+input[type="file"]::file-selector-button {
   border-radius: 4px;
   padding: 0 16px;
   height: 40px;
@@ -56,6 +115,10 @@ input[type="file"]::file-selector-button, .listBtn {
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
   /* margin-right: 16px; */
   transition: background-color 300ms;
+}
+input[type="file"]::file-selector-button {
+  width: 150px;
+  color: transparent;
 }
 input[type="file"]::file-selector-button {
   margin-right: 16px;
@@ -72,9 +135,8 @@ input[type="file"]::file-selector-button:active {
 }
 
 .fileList {
-  width: 90%;
-  height: 300px;
-  border: 1px solid;
+  width: 100%;
+  height: 100%;
   position: absolute;
   left: 0;
   right: 0;

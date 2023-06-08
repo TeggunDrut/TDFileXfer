@@ -1,8 +1,14 @@
 async function downloadFile(file) {
+  await listFiles()
   if (file.type === "dir") {
     let j = new JSZip();
     console.log(file);
-    let files = Object.keys(file.files);
+    try {
+      
+      let files = Object.keys(file.files);
+    } catch (error) {
+      console.log(error, file);
+    }
     function fs(parent) {
       const l = [];
         if (parent.type === "dir") {
@@ -34,7 +40,7 @@ async function downloadFile(file) {
       console.log(tree);
       tree.forEach(element => {
         if(typeof element === 'object') {
-          j.file(element.path, element.parts[0][0])
+            j.file(element.path, element.parts[0][0])
         }
       })
       // j.file(f.webkitRelativePath, str);

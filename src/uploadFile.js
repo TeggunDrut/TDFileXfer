@@ -24,7 +24,7 @@ async function uploadFile(e) {
     reader.readAsText(file);
   }
 
-  reader.onload = function (event) {
+  reader.onload = async function (event) {
     let id = getTime();
     obj["id"] = id;
     obj["name"] = file.name;
@@ -100,6 +100,6 @@ async function uploadFile(e) {
       }
     }
   };
-
+  
   listFiles();
 }

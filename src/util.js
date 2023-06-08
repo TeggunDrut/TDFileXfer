@@ -7,7 +7,7 @@ async function getFiles() {
       if (snapshot.exists()) {
         files = snapshot.val();
       } else {
-        console.log("No data available");
+        // console.log("No data available");
       }
     })
     .catch((error) => {
@@ -24,7 +24,7 @@ async function listFiles() {
 
   // Get the div element to display the file list
   var fileDiv = document.getElementById("fileList");
-  fileDiv.innerHTML = "";
+  fileDiv.innerHTML = '';
 
   for (var key in files) {
     if (files.hasOwnProperty(key)) {

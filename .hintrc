@@ -8,7 +8,8 @@
       {
         "ignore": [
           "-webkit-text-size-adjust",
-          "@-ms-viewport"
+          "@-ms-viewport",
+          "width: fit-content"
         ]
       }
     ]
